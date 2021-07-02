@@ -1,0 +1,12 @@
+load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
+
+copy_file(
+    name = "plugin",
+    src = select({
+        "@platforms//os:macos": "grpc-plugin-python-macos",
+        "@platforms//os:linux": "grpc-plugin-python-linux",
+    }),
+    out = "protoc-gen-grpc_python",
+    is_executable = True,
+    visibility = ["//visibility:public"],
+)
